@@ -1,9 +1,5 @@
-import React from "react";
+import ChatView from "@/views/Chat/Chat";
 
 export default function Chat() {
-  return (
-    <div>
-      <h1>Chat</h1>
-    </div>
-  );
+  return <ChatView />;
 }
