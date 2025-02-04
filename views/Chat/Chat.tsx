@@ -15,7 +15,7 @@ export default function Chat() {
   const [conversationSelected, setConversationSelected] = useState(null);
 
   return (
-    <div className="flex w-screen rounded-md  ">
+    <div className="flex w-screen ">
       <div className="flex flex-col bg-slate-100  w-[30%]">
         {/* listagem de Conversas */}
         <div className="flex justify-between w-full p-4">

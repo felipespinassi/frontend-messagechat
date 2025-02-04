@@ -1,4 +1,6 @@
+import { Input } from "@/components/ui/input";
 import { fetcher } from "@/utils/fetcher";
+import { Plus } from "lucide-react";
 import React from "react";
 import useSWR from "swr";
 
@@ -20,6 +22,10 @@ export default function ChatId({ conversationSelected }: any) {
             </p>
           );
         })}
+      </div>
+      <div className="p-2 flex items-center gap-4">
+        <Plus />
+        <Input className="bg-white" placeholder="Digite uma mensagem" />
       </div>
     </div>
   );
