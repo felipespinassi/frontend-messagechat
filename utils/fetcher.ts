@@ -1,7 +1,11 @@
-export const fetcher = (...args: any) =>
-  fetch(...args, {
+import { getTokemFromCookie } from "./getTokenFromCookie";
+
+export const fetcher = async (...args: any) => {
+  const token = await getTokemFromCookie();
+
+  return fetch(...args, {
     headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkZlbGlwZSIsImVtYWlsIjoiZmVsaXBlQGVtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFRvWGFMa3I2UnBFMGtDNEFxSVZBdmVmSDFFSlhGNW9wR3RyTnJzZFNpWUpZNElKcVJJWlg2IiwiaWF0IjoxNzM3MzAyMTA5fQ.6wTM-vwYngBYNi_RQYqRenavr3dM1ezJQzhwZwBmTIk",
+      Authorization: `Bearer ${token!.value}`,
     },
   }).then((res) => res.json());
+};

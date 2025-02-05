@@ -7,7 +7,7 @@ import ChatId from "./components/ChatId";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LoaderCircle, Plus } from "lucide-react";
 
-export default function Chat() {
+export default function Chat({ user }: any) {
   const { data, error, isLoading } = useSWR(
     "https://pingapp.com.br/conversation",
     fetcher
@@ -30,7 +30,7 @@ export default function Chat() {
         {!isLoading ? (
           <>
             {data?.map((conversation: any, index: number) => {
-              const lastMessage = conversation.message.content.slice(0, 50);
+              const lastMessage = conversation?.message.content.slice(0, 50);
               return (
                 <div
                   key={index}
@@ -41,14 +41,13 @@ export default function Chat() {
                       <Avatar>
                         <AvatarImage src="https://github.com/expedy-source.png" />
                         <AvatarFallback>
-                          {" "}
-                          {conversation.user.name}
+                          {conversation?.user.name}
                         </AvatarFallback>
                       </Avatar>
                     </div>
 
                     <div>
-                      <p>{conversation.user.name}</p>
+                      <p>{conversation?.user.name}</p>
                       <small>{lastMessage}</small>
                     </div>
                   </div>
@@ -65,7 +64,7 @@ export default function Chat() {
       </div>
 
       {conversationSelected ? (
-        <ChatId conversationSelected={conversationSelected} />
+        <ChatId user={user} conversationSelected={conversationSelected} />
       ) : (
         <div className="flex flex-col bg-slate-200 w-[70%] ">
           <div className="flex items-center justify-center h-full">

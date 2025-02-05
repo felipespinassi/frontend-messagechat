@@ -1,3 +1,6 @@
+"use client";
+
+import { socket, WebSocketContext } from "@/context/webSocketContext";
 import { MessageSquareText, Plus } from "lucide-react";
 
 export default function RootLayout({
@@ -6,20 +9,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="flex p-2 h-screen bg-slate-400">
-      <aside className="border h-full bg-slate-200 w-10 py-2 ">
-        <nav>
-          <ul>
-            <li className="flex justify-center">
-              <a href="/chat">
-                <MessageSquareText />
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+    <WebSocketContext.Provider value={socket}>
+      <main className="flex p-2 h-screen bg-slate-400">
+        <aside className="border h-full bg-slate-200 w-10 py-2 ">
+          <nav>
+            <ul>
+              <li className="flex justify-center">
+                <a href="/chat">
+                  <MessageSquareText />
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </aside>
 
-      {children}
-    </main>
+        {children}
+      </main>
+    </WebSocketContext.Provider>
   );
 }
