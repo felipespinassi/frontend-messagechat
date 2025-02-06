@@ -19,7 +19,7 @@ import { z } from "zod";
 
 export default function ChatId({ conversationSelected, user }: any) {
   const [messages, setMessages] = useState<any>([]);
-  const roomRef = useRef("room1");
+  const roomRef = useRef(`room-${conversationSelected?.id}`);
   const conversationIdRef = useRef("");
   const responseRef: any = useRef({});
 
@@ -123,8 +123,8 @@ export default function ChatId({ conversationSelected, user }: any) {
     form.reset();
   }
   return (
-    <div className="flex flex-col bg-slate-200 w-[70%] ">
-      <div className=" bg-slate-100 p-4">{conversationSelected?.user.name}</div>
+    <div className="flex flex-col  w-[75%] ">
+      <div className="  p-4">{conversationSelected?.user.name}</div>
 
       {isLoading ? (
         <div className="flex justify-center items-center h-full">
@@ -133,14 +133,16 @@ export default function ChatId({ conversationSelected, user }: any) {
       ) : (
         <div
           ref={chatRef}
-          className="gap-4 flex flex-col overflow-y-auto h-full pb-8"
+          className="gap-4 flex flex-col bg-slate-100 overflow-y-auto h-full pb-8"
         >
           {messages?.map((message: any, index: any) => {
             if (message.userId === user.id) {
               return (
                 <div key={index} className="mx-2 flex flex-col   items-end">
                   <p>Você</p>
-                  <p className=" p-2  rounded-md bg-primary max-w-[70%] text-white color-white font-semibold">
+                  <p
+                    className={` p-2  rounded-md bg-primary max-w-[70%] text-white color-white font-semibold  `}
+                  >
                     {message.content}
                   </p>
                 </div>

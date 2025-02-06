@@ -13,12 +13,12 @@ export default function Chat({ user }: any) {
     fetcher
   );
 
-  const [conversationSelected, setConversationSelected] = useState(null);
+  const [conversationSelected, setConversationSelected] = useState<any>(null);
   return (
     <div className="flex w-screen ">
-      <div className="flex flex-col bg-slate-100  w-[30%]">
+      <div className="flex flex-col border-r   w-[25%]">
         {/* listagem de Conversas */}
-        <div className="flex justify-between w-full p-4">
+        <div className="flex justify-between  w-full p-3">
           <div>
             <h1 className="text-xl font-semibold">Conversas</h1>
           </div>
@@ -28,15 +28,22 @@ export default function Chat({ user }: any) {
         </div>
 
         {!isLoading ? (
-          <>
+          <div className=" h-full m-2">
             {data?.map((conversation: any, index: number) => {
+              console.log(conversation.id === conversationSelected?.id);
               const lastMessage = conversation?.message.content.slice(0, 50);
               return (
                 <div
                   key={index}
                   onClick={() => setConversationSelected(conversation)}
                 >
-                  <div className="p-4  cursor-pointer flex gap-4 hover:bg-slate-200">
+                  <div
+                    className={`p-4  rounded-md  cursor-pointer flex gap-4  ${
+                      conversation.id === conversationSelected?.id
+                        ? "bg-primary text-white"
+                        : "hover:bg-slate-100"
+                    } `}
+                  >
                     <div>
                       <Avatar>
                         <AvatarImage src="https://github.com/expedy-source.png" />
@@ -51,11 +58,10 @@ export default function Chat({ user }: any) {
                       <small>{lastMessage}</small>
                     </div>
                   </div>
-                  <div className="border-b-2" />
                 </div>
               );
             })}
-          </>
+          </div>
         ) : (
           <div className=" h-full flex items-center justify-center">
             <LoaderCircle className=" animate-spin " />
