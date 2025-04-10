@@ -136,7 +136,7 @@ export default function ChatId({ conversationSelected, user }: any) {
           className="gap-4 flex flex-col bg-slate-100 overflow-y-auto h-full pb-8"
         >
           {messages?.map((message: any, index: any) => {
-            if (message.userId === user.id) {
+            if (message.userId == user.id) {
               return (
                 <div key={index} className="mx-2 flex flex-col   items-end">
                   <p>Você</p>
